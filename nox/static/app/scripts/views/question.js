@@ -40,7 +40,7 @@
       };
 
       QuestionView.prototype.showDown = function() {
-        if (!this.currentQuestion.get('uid') || $('.roll').length) {
+        if (!this.currentQuestion.get('uid') || app.loading) {
           return;
         }
         return this.$el.removeClass('hide-up');
@@ -55,7 +55,6 @@
       };
 
       QuestionView.prototype.gotNewQuestion = function(model, collection) {
-        console.log('loisgt');
         this.currentQuestion = model;
         this.render();
         this.showDown();
@@ -71,7 +70,9 @@
           };
         }
         app.trigger('loading');
+        app.loading = true;
         return $.post('/questions/', answer).done(function(r) {
+          app.loading = false;
           app.uid = r.uid;
           return _this.addQuestion(r);
         }).fail(function(r) {

@@ -30,8 +30,10 @@ define [
 
       fetch: (url)=>
         console.log(url)
+        app.loading = true
         $.get(url, {uid: app.uid})
           .done (r)=>
+            app.loading = false
             @update(r)
           .fail =>
             @trigger('changed')

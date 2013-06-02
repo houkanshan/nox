@@ -36,7 +36,8 @@
 
         <script id="movie-panel-tmpl" type="template">
           <div class="cover" style="overflow: hidden;border-radius:50%;">
-            <img src="{{= cover_url}}" alt="{{= name}}" style="border-radius:50%;"/>
+            <img src="" alt="{{= name}}" 
+              style="border-radius:50%;background-image: url('{{= cover_url}}')" height="320px" width="320px"/>
           </div>
           <div class="info" data-id="{{= id}}">
             <div class="info-cover">

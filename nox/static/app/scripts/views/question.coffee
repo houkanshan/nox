@@ -25,7 +25,7 @@ define [
       hideUp: =>
         @$el.addClass('hide-up')
       showDown: =>
-        if not @currentQuestion.get('uid') or $('.roll').length
+        if not @currentQuestion.get('uid') or app.loading
           return
         @$el.removeClass('hide-up')
         
@@ -35,7 +35,6 @@ define [
         @
 
       gotNewQuestion: (model, collection)->
-        console.log('loisgt')
         @currentQuestion = model
         @render()
         @showDown()
@@ -43,8 +42,10 @@ define [
 
       getQuestion: (answer={answer: -1})->
         app.trigger('loading')
+        app.loading = true
         $.post('/questions/', answer)
           .done((r)=>
+            app.loading = false
             app.uid = r.uid
             @addQuestion(r)
           )

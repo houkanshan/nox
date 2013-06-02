@@ -37,9 +37,11 @@
         var _this = this;
 
         console.log(url);
+        app.loading = true;
         return $.get(url, {
           uid: app.uid
         }).done(function(r) {
+          app.loading = false;
           return _this.update(r);
         }).fail(function() {
           return _this.trigger('changed');
